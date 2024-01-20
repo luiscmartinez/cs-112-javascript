@@ -67,6 +67,23 @@ th, td {
 	display:flex;
 	justify-content:space-between;
 }
+.summary {
+	display:flex;
+	background-color: #D9D9D9;
+	flex-direction:column;
+	width:300px;
+	padding: 0 10px;
+}
+.summary button {
+	width:80%;
+	align-self:center;
+	font-size: 1.5rem;
+	background-color: #69D467;
+}
+.summary_details {
+	display:flex;
+	justify-content:space-between;
+}
 </style>
 	</head>
 	<body>
@@ -103,12 +120,13 @@ th, td {
 						</td>
 					</tr>
 				</table>
-				<div>
-					<div>
+				<div class="summary">
+					<div class="summary_details">
 						<h2>Total</h2>
 						<h2>$18.00</h2>
 					</div>
 					<button>Check out</button>
+				</div>
 			</div>
 		</main>
 		<footer>
