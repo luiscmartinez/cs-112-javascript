@@ -38,3 +38,9 @@ th, td {
 	display:flex;
 	justify-content:space-between;
 }
+a:link {
+	color:black;
+}
+a:visited {
+	color:black;
+}
