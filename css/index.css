@@ -64,7 +64,7 @@ button {
 	margin: 1rem;
 }
 
-.item button {
+.item button, #rightPanel button {
 	background-color: #69D467;
 	width: 85%;
 	padding: 5px;

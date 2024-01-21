@@ -108,35 +108,39 @@
 					//! You can add more logic here to handle the click event
 					$rightPanel.slideToggle();
 					$overlay.fadeIn();
-					// const formContent = ""
-					// const itemOptions = item.options
-					// for (let key in itemOptions) {
-					// 	if (itemOptions.hasOwnProperty(key)) {
-					// 		const optionName = key
-					// 		const optionValues = itemOptions[key]
-					// 		const optionContent = `
-					// 		<div> 
-					// 			<h3>${key}</h3>
-					// 			${optionValues.map((optionValue) => {
-					// 				return (
-					// 					`
-					// 					<input type="radio" id="${key+optionValue}" name="${optionValue}" value="${optionValue}">
-					// 					<label for="${key+optionValue}">${optionValue}</label><br>
-					// 					`
-					// 				)
-					// 			})}
-					// 		</div>`
-					// 	}
-					// }
-					
-					// $('<form/>', {
-					// 	'id' :'optionsForm',
-					// 	html: "<p>Additional Content</p>"
-
-					// }).append($rightPanel)
-
-					// $rightPanel.html(panelContent);
-
+					let $optionsForm = $('<form id="optionsForm"></form>')
+					let formContent = ""
+					const itemOptions = item.options
+					for (let key in itemOptions) {
+						if (itemOptions.hasOwnProperty(key)) {
+							const optionName = key
+							const optionValues = itemOptions[key]
+							const optionContent = `
+								<div> 
+									<h3>${key}</h3>
+									${optionValues.map((optionValue) => {
+								return (
+									`
+											<input type="radio" id="${key + optionValue}" name="${key}" value="${optionValue}">
+											<label for="${key + optionValue}">${optionValue}</label><br>
+											`
+								)
+							}).join("")}
+								</div>
+							`
+							formContent += optionContent
+						}
+					}
+					formContent += `<div><button type="submit">Add To Cart</button></div>`
+					$optionsForm.append(formContent)
+					$rightPanel.html($optionsForm);
+					$("#optionsForm").on("submit", function (e) {
+						e.preventDefault();
+						console.log("event", e)
+						// serialize gets the data ready to be send over network
+						let formData = $(this).serialize();
+						console.log(formData, item);
+					})
 				});
 			})
 
