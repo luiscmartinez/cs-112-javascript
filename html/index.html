@@ -6,6 +6,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -67,11 +68,11 @@
 			const container = document.getElementById('items');
 			container.innerHTML = ''; // Clear existing content
 
-			items.forEach(item => {
+			items.forEach((item, i) => {
 				const itemDiv = document.createElement('div');
 				itemDiv.className = 'item';
 				itemDiv.innerHTML = `
-				<img src="../images/${item.image}" alt="${item.name}" style="max-width: 300px; height: auto;">
+				<img ${item.image == "pizza.jpg" ? "id=pizza" : ""} src="../images/${item.image}" alt="${item.name}" style="max-width: 300px; height: auto;">
 						<h2>${item.name}</h2>
 						<p>${item.description}</p>
 						<p>Price: $${item.price}</p>
@@ -83,6 +84,16 @@
 
 		// Render items on page load
 		renderItems(jsonData.items);
+		// on hover change pizza img
+		$(function () {
+			$('#pizza').hover(function () {
+				$('#pizza').attr('src', '../images/pizza-2.jpg')
+			},
+				function () {
+					$('#pizza').attr('src', "../images/pizza.jpg")
+				}
+			)
+		})
 	</script>
 </body>
 
