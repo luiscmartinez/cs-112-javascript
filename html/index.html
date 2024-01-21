@@ -10,6 +10,7 @@
 </head>
 
 <body>
+	<div id="overlay"></div>
 	<header>
 		<a href="index.html" class="nav-left"> <img src="../images/computer-club-logo.png"
 				alt="webstie logo - image of a dog" /> </a>
@@ -69,11 +70,10 @@
 			]
 		};
 
-		// Function to render items
 		$(document).ready(function () {
 			const $container = $("#items")
 			$container.empty()
-
+			// Function to render items
 			jsonData.items.forEach((item, i) => {
 				const itemContent = `
             <img id=${item.id} src="../images/${item.image}" alt="${item.name}" style="max-width: 300px; height: 200px;">
@@ -99,16 +99,24 @@
 					}
 				)
 			})
+
 			// show panel
 			const $rightPanel = $('#rightPanel')
+			const $overlay = $('#overlay');
 			$('.toggleButton').click(function () {
 				$rightPanel.slideToggle();
+				$overlay.fadeIn();
 			});
-
+			$overlay.click(function () {
+				// $rightPanel.animate({ right: '-200px' }, 500);
+				$overlay.fadeOut();
+			});
 			$(document).click(function (event) {
 				// Check if the click is outside the panel and if the panel is visible
 				if (!$(event.target).closest('#rightPanel, .toggleButton').length && $rightPanel.is(':visible')) {
 					$rightPanel.slideUp();
+					// $rightPanel.animate({ right: '-200px' }, 500);
+					$overlay.fadeOut();
 				}
 			});
 		})
