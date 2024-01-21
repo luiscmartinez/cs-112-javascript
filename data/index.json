@@ -1,0 +1,35 @@
+{
+    "items": [
+      {
+        "name": "Item 1",
+        "description": "Description of Item 1",
+        "price": 9.99,
+        "image": "image1.jpg"
+      },
+      {
+        "name": "Item 2",
+        "description": "Description of Item 2",
+        "price": 19.99,
+        "image": "image2.jpg"
+      },
+      {
+        "name": "Item 3",
+        "description": "Description of Item 3",
+        "price": 29.99,
+        "image": "image3.jpg"
+      },
+      {
+        "name": "Item 4",
+        "description": "Description of Item 4",
+        "price": 29.99,
+        "image": "image3.jpg"
+      },
+      {
+        "name": "Item 5",
+        "description": "Description of Item 5",
+        "price": 29.99,
+        "image": "image3.jpg"
+      }
+    ]
+  }
+  

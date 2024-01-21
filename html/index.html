@@ -1,42 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Huskies Computer Club Fundraising Shop</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="../css/index.css">
-	</head>
-	<body>
-		<header>
-			<a href="index.html" class="nav-left"> <img src="../images/computer-club-logo.png" alt="webstie logo - image of a dog" /> </a>
-			<h1>The Huskies Fundraising Shop</h1>
-			<a href="cart.html" class="nav-right"> <div> <img src="../images/shopping-cart-logo.png" alt="shopping cart symbol" /> </div> </a>
-		</header>
-		<main>
-			<div class="items">
-			<div class="item">
-				<img src="../images/item-thumbnail.png" alt="item image" />
-				<div> Item Name </div>
-				<div> Item Price </div>
-				<button>Add To Cart</button>
-			</div>
-			<div class="item">
-				<img src="../images/item-thumbnail.png" alt="item image" />
-				<div> Item Name </div>
-				<div> Item Price </div>
-				<button>Add To Cart</button>
-			</div>
-			<div class="item">
-				<img src="../images/item-thumbnail.png" alt="item image" />
-				<div> Item Name </div>
-				<div> Item Price </div>
-				<button>Add To Cart</button>
-			</div>
-			</div>
-		</main>
-		<footer>
-			<a href="https://www.instagram.com/huskiescomputerclub" target="_blank">Instagram</a>
-			<a href="/">Huskies Computer Club</a>
-		</footer>
-	</body>
+
+<head>
+	<title>Huskies Computer Club Fundraising Shop</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+</head>
+
+<body>
+	<header>
+		<a href="index.html" class="nav-left"> <img src="../images/computer-club-logo.png"
+				alt="webstie logo - image of a dog" /> </a>
+		<h1>The Huskies Fundraising Shop</h1>
+		<a href="cart.html" class="nav-right">
+			<div> <img src="../images/shopping-cart-logo.png" alt="shopping cart symbol" /> </div>
+		</a>
+	</header>
+	<main>
+		<div class="items" id="items">
+		</div>
+	</main>
+	<footer>
+		<a href="https://www.instagram.com/huskiescomputerclub" target="_blank">Instagram</a>
+		<a href="/">Huskies Computer Club</a>
+	</footer>
+	<script>
+		// Example JSON Data
+		const jsonData = {
+			"items": [
+				{
+					"name": "Item 1",
+					"description": "Description of Item 1",
+					"price": 9.99,
+					"image": "beef.jpg"
+				},
+				{
+					"name": "Item 2",
+					"description": "Description of Item 2",
+					"price": 19.99,
+					"image": "cake.jpg"
+				},
+				{
+					"name": "Item 3",
+					"description": "Description of Item 3",
+					"price": 2.99,
+					"image": "jello.png"
+				}
+				, {
+					"name": "Item 4",
+					"description": "Description of Item 4",
+					"price": 29.99,
+					"image": "meat-dish.png"
+				},
+				{
+					"name": "Item 5",
+					"description": "Description of Item 5",
+					"price": 5.99,
+					"image": "pizza.jpg"
+				}
+			]
+		};
+
+		// Function to render items
+		function renderItems(items) {
+			const container = document.getElementById('items');
+			container.innerHTML = ''; // Clear existing content
+
+			items.forEach(item => {
+				const itemDiv = document.createElement('div');
+				itemDiv.className = 'item';
+				itemDiv.innerHTML = `
+				<img src="../images/${item.image}" alt="${item.name}" style="max-width: 300px; height: auto;">
+						<h2>${item.name}</h2>
+						<p>${item.description}</p>
+						<p>Price: $${item.price}</p>
+						<button>Add To Cart</button>
+					`;
+				container.appendChild(itemDiv);
+			});
+		}
+
+		// Render items on page load
+		renderItems(jsonData.items);
+	</script>
+</body>
+
 </html>
