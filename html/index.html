@@ -37,7 +37,7 @@
 					"name": "Item 1",
 					"description": "Description of Item 1",
 					"price": 9.99,
-					"image": "beef.jpg"
+					"image": "beef.jpg",
 				},
 				{
 					"id": 2,
@@ -51,7 +51,11 @@
 					"name": "Item 3",
 					"description": "Description of Item 3",
 					"price": 2.99,
-					"image": "jello.png"
+					"image": "jello.png",
+					"options": {
+						"flavor": ["Lemon", "Grape", "Cherry"],
+						"size": ["small", "med", "large"]
+					}
 				}
 				, {
 					"id": 4,
@@ -73,6 +77,9 @@
 		$(document).ready(function () {
 			const $container = $("#items")
 			$container.empty()
+			const $rightPanel = $('#rightPanel')
+			const $overlay = $('#overlay');
+
 			// Function to render items
 			jsonData.items.forEach((item, i) => {
 				const itemContent = `
@@ -80,13 +87,57 @@
             <h2>${item.name}</h2>
             <p>${item.description}</p>
             <p>Price: $${item.price}</p>
-            <button class="toggleButton">Add To Cart</button>
         `;
-
+				let btn = `<button class="add-to-cart" data-id="${item.id}">Add To Cart</button>`
+				if (item?.options) {
+					btn = `<button class="toggleButton" data-id="${item.id}">Add To Cart</button>`
+				}
 				$('<div/>', {
 					'class': 'item',
-					html: itemContent
+					html: itemContent + btn
 				}).appendTo($container);
+
+				$(document).on('click', `.add-to-cart[data-id='${item.id}']`, function () {
+					const itemId = $(this).data('id');
+					console.log('Item clicked:', itemId);
+					//! You can add more logic here to handle the click event
+				});
+				$(document).on('click', `.toggleButton[data-id='${item.id}']`, function () {
+					const itemId = $(this).data('id');
+					console.log('Item wid options got clicked:', itemId, item);
+					//! You can add more logic here to handle the click event
+					$rightPanel.slideToggle();
+					$overlay.fadeIn();
+					// const formContent = ""
+					// const itemOptions = item.options
+					// for (let key in itemOptions) {
+					// 	if (itemOptions.hasOwnProperty(key)) {
+					// 		const optionName = key
+					// 		const optionValues = itemOptions[key]
+					// 		const optionContent = `
+					// 		<div> 
+					// 			<h3>${key}</h3>
+					// 			${optionValues.map((optionValue) => {
+					// 				return (
+					// 					`
+					// 					<input type="radio" id="${key+optionValue}" name="${optionValue}" value="${optionValue}">
+					// 					<label for="${key+optionValue}">${optionValue}</label><br>
+					// 					`
+					// 				)
+					// 			})}
+					// 		</div>`
+					// 	}
+					// }
+					
+					// $('<form/>', {
+					// 	'id' :'optionsForm',
+					// 	html: "<p>Additional Content</p>"
+
+					// }).append($rightPanel)
+
+					// $rightPanel.html(panelContent);
+
+				});
 			})
 
 			// on hover change pizza img
@@ -101,16 +152,11 @@
 			})
 
 			// show panel
-			const $rightPanel = $('#rightPanel')
-			const $overlay = $('#overlay');
-			$('.toggleButton').click(function () {
-				$rightPanel.slideToggle();
-				$overlay.fadeIn();
-			});
 			$overlay.click(function () {
 				// $rightPanel.animate({ right: '-200px' }, 500);
 				$overlay.fadeOut();
 			});
+
 			$(document).click(function (event) {
 				// Check if the click is outside the panel and if the panel is visible
 				if (!$(event.target).closest('#rightPanel, .toggleButton').length && $rightPanel.is(':visible')) {
