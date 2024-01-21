@@ -22,6 +22,7 @@
 		<div id="items">
 		</div>
 	</main>
+	<div id="rightPanel" class="hidden">This is a hidden panel!</div>
 	<footer>
 		<a href="https://www.instagram.com/huskiescomputerclub" target="_blank">Instagram</a>
 		<a href="/">Huskies Computer Club</a>
@@ -79,7 +80,7 @@
             <h2>${item.name}</h2>
             <p>${item.description}</p>
             <p>Price: $${item.price}</p>
-            <button>Add To Cart</button>
+            <button class="toggleButton">Add To Cart</button>
         `;
 
 				$('<div/>', {
@@ -98,6 +99,18 @@
 					}
 				)
 			})
+			// show panel
+			const $rightPanel = $('#rightPanel')
+			$('.toggleButton').click(function () {
+				$rightPanel.slideToggle();
+			});
+
+			$(document).click(function (event) {
+				// Check if the click is outside the panel and if the panel is visible
+				if (!$(event.target).closest('#rightPanel, .toggleButton').length && $rightPanel.is(':visible')) {
+					$rightPanel.slideUp();
+				}
+			});
 		})
 
 	</script>
