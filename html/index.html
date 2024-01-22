@@ -32,59 +32,15 @@
 		<div id="items">
 		</div>
 	</main>
-	<div id="rightPanel" class="hidden">This is a hidden panel!</div>
+	<div id="rightPanel" class="hidden"></div>
 	<footer>
 		<a href="https://www.instagram.com/huskiescomputerclub" target="_blank">Instagram</a>
 		<a href="/">Huskies Computer Club</a>
 	</footer>
 	<script src="../js/updateCartCountUI.js"></script>
 	<script src="../js/addToCart.js"></script>
+	<script src="../js/jsonMockData.js"></script>
 	<script>
-		// Example JSON Data
-		const jsonData = {
-			"items": [
-				{
-					"id": 1,
-					"name": "Item 1",
-					"description": "Description of Item 1",
-					"price": 9.99,
-					"image": "beef.jpg",
-				},
-				{
-					"id": 2,
-					"name": "Item 2",
-					"description": "Description of Item 2",
-					"price": 19.99,
-					"image": "cake.jpg"
-				},
-				{
-					"id": 3,
-					"name": "Item 3",
-					"description": "Description of Item 3",
-					"price": 2.99,
-					"image": "jello.png",
-					"options": {
-						"flavor": ["Lemon", "Grape", "Cherry"],
-						"size": ["small", "med", "large"]
-					}
-				}
-				, {
-					"id": 4,
-					"name": "Item 4",
-					"description": "Description of Item 4",
-					"price": 29.99,
-					"image": "meat-dish.png"
-				},
-				{
-					"id": 5,
-					"name": "Item 5",
-					"description": "Description of Item 5",
-					"price": 5.99,
-					"image": "pizza.jpg"
-				}
-			]
-		};
-
 		function showToast(message) {
 			$('#toast-body').html(message);
 			$('#toast').addClass('show');
@@ -141,14 +97,14 @@
 							const optionContent = `
 								<div> 
 									<h3>${key}</h3>
+									<div class="option">
 									${optionValues.map((optionValue) => {
-								return (
-									`
+								return (`
 											<input type="radio" id="${key + optionValue}" name="${key}" value="${optionValue}">
 											<label for="${key + optionValue}">${optionValue}</label><br>
-											`
-								)
+											`)
 							}).join("")}
+							</div>
 								</div>
 							`
 							formContent += optionContent
