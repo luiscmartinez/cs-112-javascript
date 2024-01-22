@@ -37,6 +37,8 @@
 		<a href="https://www.instagram.com/huskiescomputerclub" target="_blank">Instagram</a>
 		<a href="/">Huskies Computer Club</a>
 	</footer>
+	<script src="../js/updateCartCountUI.js"></script>
+	<script src="../js/addToCart.js"></script>
 	<script>
 		// Example JSON Data
 		const jsonData = {
@@ -82,31 +84,6 @@
 				}
 			]
 		};
-		// Add to Cart
-		function addToCart(addItem) {
-			console.log('adding to cart', addItem)
-			const { id, name, price } = addItem
-			let cart = JSON.parse(localStorage.getItem('cart')) || [];
-			let found = cart.find(item => item.id === id);
-
-			if (found) {
-				found.quantity += 1;
-			} else {
-				cart.push({ id, name, quantity: 1, price });
-			}
-
-			localStorage.setItem('cart', JSON.stringify(cart));
-			updateCartUI();
-		}
-
-		// Update Cart UI
-		function updateCartUI() {
-			let cart = JSON.parse(localStorage.getItem('cart')) || [];
-			$('#cart_count').empty();
-			$('#cart_count').text(cart.reduce((accumulator, item) => {
-				return accumulator + item.quantity;
-			}, 0));
-		}
 
 		function showToast(message) {
 			$('#toast-body').html(message);
@@ -118,7 +95,7 @@
 		}
 		const onAddItemSuccessMsg = '<div>Item added to your cart! <a href="cart.html" id="viewCart">view cart</a></div>'
 		$(document).ready(function () {
-			updateCartUI();
+			updateCartCountUI();
 			const $container = $("#items")
 			$container.empty()
 			const $rightPanel = $('#rightPanel')
