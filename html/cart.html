@@ -1,58 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Huskies Computer Club Fundraising Shop</title>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="../css/index.css">
-		<link rel="stylesheet" type="text/css" href="../css/cart.css">
-	</head>
-	<body>
-		<header>
-			<a href="/" class="nav-left"> <img src="../images/computer-club-logo.png" alt="webstie logo - image of a dog" /> </a>
-			<h1>The Huskies Fundraising Shop</h1>
-			<a href="cart.html" class="nav-right"> <div> <img src="../images/shopping-cart-logo.png" alt="shopping cart symbol" /> </div> </a>
-		</header>
-		<main>
-			<h1>Cart</h1>
-			<div class="main_container">
-				<table>
-					<tr>
-						<th>Item</th>
-						<th>Quantity</th>
-						<th>Total</th>
-					</tr>
-					<tr>
-						<td>
-							<div class="column_1">
-								<img src="../images/meat-dish.png" alt="item image" />
-								<p>item name</p>
-							</div>
-						</td>
-						<td>
-							<div class="num_stepper">
-								<div>-</div>
-								<div>1</div>
-								<div>+</div>
-							</div>
-						</td>
-						<td>
-							$1.00
-						</td>
-					</tr>
-				</table>
-				<div class="summary">
-					<div class="summary_details">
-						<h2>Total</h2>
-						<h2>$18.00</h2>
-					</div>
-					<button><a href="contact.html">Check out</a></button>
-				</div>
+
+<head>
+	<title>Huskies Computer Club Fundraising Shop</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<link rel="stylesheet" type="text/css" href="../css/cart.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+</head>
+
+<body>
+	<header>
+		<a href="index.html" class="nav-left"> <img src="../images/computer-club-logo.png" alt="webstie logo - image of a dog" />
+		</a>
+		<h1>The Huskies Fundraising Shop</h1>
+		<a href="cart.html" class="nav-right">
+			<div class="bubble-container">
+				<img src="../images/shopping-cart-logo.png" alt="shopping cart symbol" />
+				<div id="cart_count"></div>
 			</div>
-		</main>
-		<footer>
-			<a href="https://www.instagram.com/huskiescomputerclub" target="_blank">Instagram</a>
-			<a href="/">Huskies Computer Club</a>
-		</footer>
-	</body>
+		</a>
+	</header>
+	<main>
+		<h1>Cart</h1>
+		<div class="main_container">
+			<table id="table">
+				<tr>
+					<th>Item</th>
+					<th>Quantity</th>
+					<th>Total</th>
+				</tr>
+			</table>
+			<div class="summary">
+				<div class="summary_details"></div>
+				<button><a href="contact.html">Check out</a></button>
+			</div>
+		</div>
+	</main>
+	<footer>
+		<a href="https://www.instagram.com/huskiescomputerclub" target="_blank">Instagram</a>
+		<a href="/">Huskies Computer Club</a>
+	</footer>
+	<script src="../js/updateCartCountUI.js"></script>
+	<script src="../js/updateCartTableUI.js"></script>
+	<script>
+		// Initialize
+		$(document).ready(function () {
+			updateCartCountUI();
+			updateCartTableUI()
+		});
+	</script>
+</body>
+
 </html>
