@@ -104,7 +104,7 @@ button {
   position: relative;
   display: inline-block;
 }
-#bubble-counter {
+#cart_count {
   position: absolute;
   top: 0;
   right: 0;
