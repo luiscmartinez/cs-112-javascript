@@ -116,6 +116,7 @@
 			}, 3000);
 
 		}
+		const onAddItemSuccessMsg = '<div>Item added to your cart! <a href="cart.html" id="viewCart">view cart</a></div>'
 		$(document).ready(function () {
 			updateCartUI();
 			const $container = $("#items")
@@ -145,7 +146,7 @@
 					console.log('Item clicked:', itemId);
 					//! You can add more logic here to handle the click event
 					addToCart(item)
-					showToast('<div>Item added to your cart! <a href="cart.html">view cart</a></div>');
+					showToast(onAddItemSuccessMsg);
 				});
 				$(document).on('click', `.toggleButton[data-id='${item.id}']`, function () {
 					const itemId = $(this).data('id');
@@ -191,7 +192,7 @@
 						const options = Object.fromEntries(params)
 
 						addToCart({ ...item, options })
-						showToast('<div>Item added to your cart! <a href="cart.html">view cart</a></div>');
+						showToast(onAddItemSuccessMsg);
 						$rightPanel.slideUp();
 						$overlay.fadeOut();
 					})
