@@ -16,7 +16,10 @@
 				alt="webstie logo - image of a dog" /> </a>
 		<h1>The Huskies Fundraising Shop</h1>
 		<a href="cart.html" class="nav-right">
-			<div> <img src="../images/shopping-cart-logo.png" alt="shopping cart symbol" /> </div>
+			<div class="bubble-container">
+				<img src="../images/shopping-cart-logo.png" alt="shopping cart symbol" />
+				<div id="cart_count">0</div>
+			</div>
 		</a>
 	</header>
 	<main>
@@ -37,7 +40,7 @@
 					"name": "Item 1",
 					"description": "Description of Item 1",
 					"price": 9.99,
-					"image": "beef.jpg"
+					"image": "beef.jpg",
 				},
 				{
 					"id": 2,
@@ -51,7 +54,11 @@
 					"name": "Item 3",
 					"description": "Description of Item 3",
 					"price": 2.99,
-					"image": "jello.png"
+					"image": "jello.png",
+					"options": {
+						"flavor": ["Lemon", "Grape", "Cherry"],
+						"size": ["small", "med", "large"]
+					}
 				}
 				, {
 					"id": 4,
@@ -69,10 +76,39 @@
 				}
 			]
 		};
+		// Add to Cart
+		function addToCart(addItem) {
+			console.log('adding to cart', addItem)
+			const { id, name, price } = addItem
+			let cart = JSON.parse(localStorage.getItem('cart')) || [];
+			let found = cart.find(item => item.id === id);
+
+			if (found) {
+				found.quantity += 1;
+			} else {
+				cart.push({ id, name, quantity: 1, price });
+			}
+
+			localStorage.setItem('cart', JSON.stringify(cart));
+			updateCartUI();
+		}
+
+		// Update Cart UI
+		function updateCartUI() {
+			let cart = JSON.parse(localStorage.getItem('cart')) || [];
+			$('#cart_count').empty();
+			$('#cart_count').text(cart.reduce((accumulator, item) => {
+				return accumulator + item.quantity;
+			}, 0));
+		}
 
 		$(document).ready(function () {
+			updateCartUI();
 			const $container = $("#items")
 			$container.empty()
+			const $rightPanel = $('#rightPanel')
+			const $overlay = $('#overlay');
+
 			// Function to render items
 			jsonData.items.forEach((item, i) => {
 				const itemContent = `
@@ -80,13 +116,70 @@
             <h2>${item.name}</h2>
             <p>${item.description}</p>
             <p>Price: $${item.price}</p>
-            <button class="toggleButton">Add To Cart</button>
         `;
-
+				let btn = `<button class="add-to-cart" data-id="${item.id}">Add To Cart</button>`
+				if (item?.options) {
+					btn = `<button class="toggleButton" data-id="${item.id}">Add To Cart</button>`
+				}
 				$('<div/>', {
 					'class': 'item',
-					html: itemContent
+					html: itemContent + btn
 				}).appendTo($container);
+
+				$(document).on('click', `.add-to-cart[data-id='${item.id}']`, function () {
+					const itemId = $(this).data('id');
+					console.log('Item clicked:', itemId);
+					//! You can add more logic here to handle the click event
+					addToCart(item)
+				});
+				$(document).on('click', `.toggleButton[data-id='${item.id}']`, function () {
+					const itemId = $(this).data('id');
+					console.log('Item wid options got clicked:', itemId, item);
+					//! You can add more logic here to handle the click event
+					$rightPanel.slideToggle();
+					$overlay.fadeIn();
+					let $optionsForm = $('<form id="optionsForm"></form>')
+					let formContent = ""
+					const itemOptions = item.options
+					for (let key in itemOptions) {
+						if (itemOptions.hasOwnProperty(key)) {
+							const optionName = key
+							const optionValues = itemOptions[key]
+							const optionContent = `
+								<div> 
+									<h3>${key}</h3>
+									${optionValues.map((optionValue) => {
+								return (
+									`
+											<input type="radio" id="${key + optionValue}" name="${key}" value="${optionValue}">
+											<label for="${key + optionValue}">${optionValue}</label><br>
+											`
+								)
+							}).join("")}
+								</div>
+							`
+							formContent += optionContent
+						}
+					}
+					formContent += `<div><button type="submit">Add To Cart</button></div>`
+					$optionsForm.append(formContent)
+					$rightPanel.html($optionsForm);
+					$("#optionsForm").on("submit", function (e) {
+						e.preventDefault();
+						console.log("event", e)
+						console.log("this", this)
+						// serialize gets the data ready to be send over network
+						let formData = $(this).serialize();
+						console.log(formData, item);
+						// taking the serialize form data without sending over network might eventually break;
+						const params = new URLSearchParams(formData)
+						const options = Object.fromEntries(params)
+
+						addToCart({ ...item, options })
+						$rightPanel.slideUp();
+						$overlay.fadeOut();
+					})
+				});
 			})
 
 			// on hover change pizza img
@@ -101,16 +194,11 @@
 			})
 
 			// show panel
-			const $rightPanel = $('#rightPanel')
-			const $overlay = $('#overlay');
-			$('.toggleButton').click(function () {
-				$rightPanel.slideToggle();
-				$overlay.fadeIn();
-			});
 			$overlay.click(function () {
 				// $rightPanel.animate({ right: '-200px' }, 500);
 				$overlay.fadeOut();
 			});
+
 			$(document).click(function (event) {
 				// Check if the click is outside the panel and if the panel is visible
 				if (!$(event.target).closest('#rightPanel, .toggleButton').length && $rightPanel.is(':visible')) {
