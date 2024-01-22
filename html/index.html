@@ -75,15 +75,11 @@
 				}).appendTo($container);
 
 				$(document).on('click', `.add-to-cart[data-id='${item.id}']`, function () {
-					const itemId = $(this).data('id');
-					console.log('Item clicked:', itemId);
 					//! You can add more logic here to handle the click event
 					addToCart(item)
 					showToast(onAddItemSuccessMsg);
 				});
 				$(document).on('click', `.toggleButton[data-id='${item.id}']`, function () {
-					const itemId = $(this).data('id');
-					console.log('Item wid options got clicked:', itemId, item);
 					//! You can add more logic here to handle the click event
 					$rightPanel.slideToggle();
 					$overlay.fadeIn();
@@ -115,11 +111,8 @@
 					$rightPanel.html($optionsForm);
 					$("#optionsForm").on("submit", function (e) {
 						e.preventDefault();
-						console.log("event", e)
-						console.log("this", this)
 						// serialize gets the data ready to be send over network
 						let formData = $(this).serialize();
-						console.log(formData, item);
 						// taking the serialize form data without sending over network might eventually break;
 						const params = new URLSearchParams(formData)
 						const options = Object.fromEntries(params)
@@ -131,21 +124,16 @@
 					})
 				});
 			})
-
 			// on hover change pizza img
-			$(function () {
-				$('#5').hover(function () {
-					$('#5').attr('src', '../images/pizza-2.jpg')
-				},
-					function () {
-						$('#5').attr('src', "../images/pizza.jpg")
-					}
-				)
-			})
-
+			$('#5').hover(function () {
+				$('#5').attr('src', '../images/pizza-2.jpg')
+			},
+				function () {
+					$('#5').attr('src', "../images/pizza.jpg")
+				}
+			)
 			// show panel
 			$overlay.click(function () {
-				// $rightPanel.animate({ right: '-200px' }, 500);
 				$overlay.fadeOut();
 			});
 
@@ -153,7 +141,6 @@
 				// Check if the click is outside the panel and if the panel is visible
 				if (!$(event.target).closest('#rightPanel, .toggleButton').length && $rightPanel.is(':visible')) {
 					$rightPanel.slideUp();
-					// $rightPanel.animate({ right: '-200px' }, 500);
 					$overlay.fadeOut();
 				}
 			});
