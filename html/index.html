@@ -22,6 +22,12 @@
 			</div>
 		</a>
 	</header>
+	<div id="toast" class="toast">
+		<div id="toast-header" class="toast-header">
+			Success!
+		</div>
+		<div id="toast-body" class="toast-body"></div>
+	</div>
 	<main>
 		<div id="items">
 		</div>
@@ -102,6 +108,14 @@
 			}, 0));
 		}
 
+		function showToast(message) {
+			$('#toast-body').html(message);
+			$('#toast').addClass('show');
+			setTimeout(function () {
+				$('#toast').removeClass('show');
+			}, 3000);
+
+		}
 		$(document).ready(function () {
 			updateCartUI();
 			const $container = $("#items")
@@ -131,6 +145,7 @@
 					console.log('Item clicked:', itemId);
 					//! You can add more logic here to handle the click event
 					addToCart(item)
+					showToast('<div>Item added to your cart! <a href="cart.html">view cart</a></div>');
 				});
 				$(document).on('click', `.toggleButton[data-id='${item.id}']`, function () {
 					const itemId = $(this).data('id');
@@ -176,6 +191,7 @@
 						const options = Object.fromEntries(params)
 
 						addToCart({ ...item, options })
+						showToast('<div>Item added to your cart! <a href="cart.html">view cart</a></div>');
 						$rightPanel.slideUp();
 						$overlay.fadeOut();
 					})
