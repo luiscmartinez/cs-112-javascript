@@ -220,3 +220,8 @@ button {
   display: flex;
   justify-content: space-evenly;
 }
+
+#shopping-cart-logo,
+#shopping-bag-logo {
+  width: 40px;
+}
