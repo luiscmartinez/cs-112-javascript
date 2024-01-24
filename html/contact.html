@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="../css/index.css">
 	<link rel="stylesheet" type="text/css" href="../css/contact.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -20,7 +21,7 @@
 	</header>
 	<main>
 		<h1>Contact Form</h1>
-		<form>
+		<form id="orderForm">
 			<div>
 				<label for="firstName">Enter your first name: </label>
 				<input type="text" name="firstName" id="first" required />
@@ -38,6 +39,17 @@
 		<a href="https://www.instagram.com/huskiescomputerclub" target="_blank">Instagram</a>
 		<a href="/">Huskies Computer Club</a>
 	</footer>
+	<script>
+		$(document).ready(function () {
+			$('#orderForm').submit(function (event) {
+				event.preventDefault();
+
+				alert('Thank you for your order');
+
+				window.location.href = 'order-placed.html';
+			});
+		});
+	</script>
 </body>
 
 </html>
