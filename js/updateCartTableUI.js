@@ -35,6 +35,13 @@ function updateCartTableUI() {
     );
   } else {
     //! handle nothing in your shopping cart ui
+    $("#table").replaceWith(
+      `
+            <h1>You got nothing in ur cart</h1> 
+            <p>Go shop :)</p>
+            <img src="../images/shopping_cart.gif" alt="empty shopping cart" />
+      `
+    );
   }
 }
 function formatNum(num) {
