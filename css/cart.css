@@ -51,3 +51,10 @@ a:link {
 a:visited {
   color: black;
 }
+#checkout_btn a {
+  width: 100%;
+  display: block;
+}
+#checkout_btn:hover {
+  cursor: pointer;
+}
