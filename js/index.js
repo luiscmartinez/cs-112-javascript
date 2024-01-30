@@ -32,12 +32,10 @@ $(document).ready(function () {
     }).appendTo($container);
 
     $(document).on("click", `.add-to-cart[data-id='${item.id}']`, function () {
-      //! You can add more logic here to handle the click event
       addToCart(item);
       showToast(onAddItemSuccessMsg);
     });
     $(document).on("click", `.toggleButton[data-id='${item.id}']`, function () {
-      //! You can add more logic here to handle the click event
       $rightPanel.slideToggle();
       $overlay.fadeIn();
       let $optionsForm = $('<form id="optionsForm"></form>');

@@ -12,12 +12,23 @@
 
 <body>
 	<header>
-		<a href="index.html" class="nav-left"> <img src="/images/computer-club-logo.png"
-				alt="webstie logo - image of a dog" /> </a>
-		<h1>The Huskies Fundraising Shop</h1>
-		<a href="index.html" class="nav-right">
-			<div> <img src="/images/shopping-bag.svg" alt="shopping cart symbol" id="shopping-bag-logo" /> </div>
-		</a>
+		<ul>
+			<li class="nav-left">
+				<a href="index.html">
+					<img src="/images/computer-club-logo.png" alt="website logo - image of a dog" />
+				</a>
+			</li>
+			<li>
+				<a href="index.html" class="nav-center">
+					<h1>The Huskies Fundraising Shop</h1>
+				</a>
+			</li>
+			<li class="nav-right">
+				<a href="index.html">
+					<img src="/images/shopping-bag.svg" alt="shopping cart symbol" id="shopping-bag-logo" />
+				</a>
+			</li>
+		</ul>
 	</header>
 	<main>
 		<h1>Contact Form</h1>
@@ -28,7 +39,8 @@
 			</div>
 			<div>
 				<label for="email">Enter your email:</label>
-				<input type="email" id="email" pattern="^[a-zA-Z0-9._%+-]+@[eE][xX][aA][mM][pP][lL][eE]\.com$" required />
+				<input type="email" id="email" pattern="^[a-zA-Z0-9._%+-]+@[eE][xX][aA][mM][pP][lL][eE]\.com$"
+					required />
 			</div>
 			<div>
 				<input type="submit" value="Place Order" />

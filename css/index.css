@@ -6,11 +6,16 @@ body {
   min-height: 100vh;
 }
 
-header {
+header ul {
   background-color: #d9d9d9;
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+.nav-center {
+  color: black;
 }
 
 main {
@@ -34,6 +39,11 @@ footer a:link {
 
 footer a:visited {
   color: black;
+}
+
+ul,
+li {
+  list-style-type: none;
 }
 
 .nav-left {
